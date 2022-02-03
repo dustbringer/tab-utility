@@ -3,16 +3,24 @@
   <head>
     <title>Suspended</title>
     <link rel="stylesheet" type="text/css" href="css/suspended.css" />
+    <script src="scripts/moment-with-locales.min.js"></script>
   </head>
 
   <body>
-    <div class="centered">
-      <h2 id="heading">Suspended</h2>
+    <div class="container">
+      <img id="suspended-logo" src="img/icon-grey.svg" />
+      <h1 id="suspended-title">Suspended</h1>
+      <h2 id="suspended-time"></h2>
+
+      <h2 class="heading">Title</h2>
       <div id="title-container">
         <img id="icon" />
-        <h3 id="title"></h3>
+        <p id="title"></p>
       </div>
-      <h3 id="url"></h3>
+
+      <h2 class="heading">URL</h2>
+      <p id="url"></p>
+      <button id="reload-button" class="button-3">Reload</button>
     </div>
 
     <script type="text/javascript" src="js/suspended.js"></script>

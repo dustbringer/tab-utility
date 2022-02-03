@@ -2,11 +2,23 @@
 
 const urlParams = new URLSearchParams(window.location.search);
 
-const url_element = document.getElementById("url");
-url_element.appendChild(document.createTextNode(urlParams.get("url")));
+const timeElement = document.getElementById("suspended-time");
+const time = moment(urlParams.get("time"));
+timeElement.appendChild(
+  document.createTextNode(time.format("Do MMMM YYYY, h:mm:ss a"))
+);
 
-const icon_element = document.getElementById("icon");
-icon_element.setAttribute("src", urlParams.get("favicon"));
+const iconElement = document.getElementById("icon");
+iconElement.setAttribute("src", urlParams.get("favicon"));
 
-const title_element = document.getElementById("title");
-title_element.appendChild(document.createTextNode(urlParams.get("title")));
+const urlElement = document.getElementById("url");
+urlElement.appendChild(document.createTextNode(urlParams.get("url")));
+
+const titleElement = document.getElementById("title");
+titleElement.appendChild(document.createTextNode(urlParams.get("title")));
+
+const reload_button = document.getElementById("reload-button");
+reload_button.addEventListener("click", () => {
+  console.log(urlParams.get("url"));
+  window.location.href = urlParams.get("url");
+});
