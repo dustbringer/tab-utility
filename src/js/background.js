@@ -17,15 +17,17 @@ function suspendTab(tab) {
       url: tab.url,
       favicon: tab.favIconUrl,
       title: tab.title,
-      time: new Date().toLocaleString(),
+      time: new Date().toISOString(),
     });
     chrome.tabs.update(tab.id, { url: `${suspend_url}?${query}` });
   }
 }
 
-chrome.contextMenus.create({
-  id: "suspendTabAction",
-  title: "Suspend Tab",
+chrome.runtime.onInstalled.addListener((details) => {
+  chrome.contextMenus.create({
+    id: "suspendTabAction",
+    title: "Suspend Tab",
+  });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
