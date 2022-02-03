@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "TabSuspender",
+  "description": "Only what I need in a browser tab suspender.",
+  "version": "0.1",
+  "author": "dustbringer",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "192": "img/icon192.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png",
+      "192": "img/icon192.png"
+    },
+    "default_title": "Popup",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["tabs", "storage", "contextMenus", "activeTab"],
+  "host_permissions": ["*://*/*"],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "file://*/*"],
+      "js": ["js/contentScript.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["suspended.html"],
+      "matches": []
+    }
+  ]
+}

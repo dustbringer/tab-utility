@@ -1,0 +1,32 @@
+.centered {
+  position: fixed; /* or absolute */
+  top: 40%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+#heading {
+  text-align: center;
+}
+
+#url {
+  text-align: center;
+}
+
+#icon {
+  display: block;
+  margin: 0 6px;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+#title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#title {
+  text-align: center;
+}
