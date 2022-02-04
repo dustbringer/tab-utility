@@ -16,6 +16,7 @@ urlElement.appendChild(document.createTextNode(urlParams.get("url")));
 
 const titleElement = document.getElementById("title");
 titleElement.appendChild(document.createTextNode(urlParams.get("title")));
+document.title = `[S] ${urlParams.get("title")}`;
 
 const reload_button = document.getElementById("reload-button");
 reload_button.addEventListener("click", () => {
