@@ -1,7 +1,8 @@
 import suspendTab from "./components/suspend/suspendTab.js";
-import { downloadText } from "./components/saveTabs/downloadFile.js";
-import { getAllTabs } from "./components/saveTabs/saveLocal.js";
-import * as time from "./components/time.js";
+import {
+  saveTabsBrowser,
+  saveTabsDownload,
+} from "./components/saveTabs/saveTabs.js";
 
 // Suspend
 const suspendButtonElement = document.getElementById("button-suspend");
@@ -13,14 +14,16 @@ suspendButtonElement.addEventListener("click", () => {
   });
 });
 
-// Save tab info
-const saveButtonElement = document.getElementById("button-save");
-saveButtonElement.addEventListener("click", () => {
-  getAllTabs().then((res) => {
-    downloadText(
-      `tabsExport_${new Date().getTime()}.json`,
-      JSON.stringify({ date: time.now(), ...res }, null, 4),
-      "application/json"
-    );
-  });
+// Save tab info to browser
+const saveToBrowserButtonElement = document.getElementById(
+  "button-save-to-browser"
+);
+saveToBrowserButtonElement.addEventListener("click", () => {
+  saveTabsBrowser();
+});
+
+// Save tab info to file
+const saveToFileButtonElement = document.getElementById("button-save-to-file");
+saveToFileButtonElement.addEventListener("click", () => {
+  saveTabsDownload();
 });

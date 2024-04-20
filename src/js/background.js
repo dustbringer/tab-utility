@@ -1,6 +1,6 @@
 // import information https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/basics
 import suspendTab from "./components/suspend/suspendTab.js";
-import { saveTabs } from "./components/saveTabs/saveLocal.js";
+import { saveTabsBrowser } from "./components/saveTabs/saveTabs.js";
 import * as time from "./components/time.js";
 
 /************************* Listeners *************************/
@@ -9,7 +9,7 @@ chrome.runtime.onStartup.addListener(() => {
   chrome.storage.local.get("saveTabs-lastSave").then((res) => {
     const lastSave = Date.parse(res["saveTabs-lastSave"]);
     if (time.diffDays(lastSave, new Date()) >= 0.99) {
-      saveTabs(); // Save if it has been almost a day
+      saveTabsBrowser(); // Save if it has been almost a day
     }
   });
 });
@@ -29,10 +29,10 @@ chrome.runtime.onInstalled.addListener((details) => {
     id: "suspendTabAction",
     title: "Suspend Tab",
   });
-  chrome.contextMenus.create({
-    id: "saveTabs",
-    title: "Save Tabs to Browser",
-  });
+  // chrome.contextMenus.create({
+  //   id: "saveTabs",
+  //   title: "Save Tabs to Browser",
+  // });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
@@ -40,6 +40,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "suspendTabAction") {
     suspendTab(tab);
   } else if (info.menuItemId === "saveTabs") {
-    saveTabs();
+    saveTabsBrowser();
   }
 });

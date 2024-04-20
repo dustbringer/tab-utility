@@ -1,28 +1,30 @@
 import * as time from "../time.js";
+import { downloadText } from "./downloadFile.js";
 
-export const getAllTabs = () => Promise.all([
-  chrome.tabs.query({}).then((res) =>
-    res.map(({ groupId, pinned, title, url, windowId }) => ({
-      groupId,
-      pinned,
-      title,
-      url,
-      windowId,
-    }))
-  ),
-  chrome.tabGroups.query({}).then((res) =>
-    res.map(({ color, title, id, windowId }) => ({
-      color,
-      title,
-      groupId: id,
-      windowId,
-    }))
-  ),
-]).then(([tabs, groups]) => ({ tabs: tabs, groups: groups }));
+export const getAllTabs = () =>
+  Promise.all([
+    chrome.tabs.query({}).then((res) =>
+      res.map(({ groupId, pinned, title, url, windowId }) => ({
+        groupId,
+        pinned,
+        title,
+        url,
+        windowId,
+      }))
+    ),
+    chrome.tabGroups.query({}).then((res) =>
+      res.map(({ color, title, id, windowId }) => ({
+        color,
+        title,
+        groupId: id,
+        windowId,
+      }))
+    ),
+  ]).then(([tabs, groups]) => ({ tabs: tabs, groups: groups }));
 
 export const MAXINDEX = 100;
 
-export const saveTabs = () => {
+export const saveTabsBrowser = () => {
   // Get the next index to save to
   chrome.storage.local
     .get("saveTabs-nextIndex")
@@ -57,3 +59,12 @@ export const saveTabs = () => {
   // chrome.storage.local.set({ "saveTabs-nextIndex": 10 });
   // chrome.storage.local.remove("saveTabs-nextIndex");
 };
+
+export const saveTabsDownload = () =>
+  getAllTabs().then((res) => {
+    downloadText(
+      `tabsExport_${new Date().getTime()}.json`,
+      JSON.stringify({ date: time.now(), ...res }, null, 4),
+      "application/json"
+    );
+  });
