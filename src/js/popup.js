@@ -1,8 +1,10 @@
 import suspendTab from "./components/suspend/suspendTab.js";
 import {
+  getLastSave,
   saveTabsBrowser,
   saveTabsDownload,
 } from "./components/saveTabs/saveTabs.js";
+import { formatTime } from "./components/time.js";
 
 // Suspend
 const suspendButtonElement = document.getElementById("button-suspend");
@@ -20,6 +22,13 @@ const saveToBrowserButtonElement = document.getElementById(
 );
 saveToBrowserButtonElement.addEventListener("click", () => {
   saveTabsBrowser();
+});
+
+// display last saved
+
+const lastSavedSpanElement = document.getElementById("last-saved");
+getLastSave().then((res) => {
+  lastSavedSpanElement.appendChild(document.createTextNode(formatTime(new Date(Date.parse(res)))));
 });
 
 // Save tab info to file

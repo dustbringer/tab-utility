@@ -7,7 +7,15 @@ import * as time from "./components/time.js";
 // Startup
 chrome.runtime.onStartup.addListener(() => {
   chrome.storage.local.get("saveTabs-lastSave").then((res) => {
-    const lastSave = Date.parse(res["saveTabs-lastSave"]);
+    const lastSave = time.toDay(new Date(Date.parse(res["saveTabs-lastSave"])));
+    console.log(
+      `Tabs: Day of Last save = ${time.formatDate(
+        lastSave
+      )}, Now = ${time.formatTime(time.now())}, Difference = ${time.diffDays(
+        lastSave,
+        time.now()
+      )}`
+    );
     if (time.diffDays(lastSave, new Date()) >= 0.99) {
       saveTabsBrowser(); // Save if it has been almost a day
     }

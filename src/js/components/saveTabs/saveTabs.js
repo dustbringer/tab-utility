@@ -22,6 +22,11 @@ export const getAllTabs = () =>
     ),
   ]).then(([tabs, groups]) => ({ tabs: tabs, groups: groups }));
 
+export const getLastSave = () =>
+  chrome.storage.local
+    .get("saveTabs-lastSave")
+    .then((res) => res["saveTabs-lastSave"]);
+
 export const MAXINDEX = 100;
 
 export const saveTabsBrowser = () => {
@@ -39,7 +44,7 @@ export const saveTabsBrowser = () => {
       // Save tabs to index
       getAllTabs().then((res) => {
         console.log(res);
-        const tabData = JSON.stringify({ time: time.now(), ...res });
+        const tabData = JSON.stringify({ time: time.nowISO(), ...res });
         chrome.storage.local
           .set({ [`saveTabs-index-${nextIndex}`]: tabData })
           .then(() => {
@@ -53,7 +58,7 @@ export const saveTabsBrowser = () => {
       });
 
       // Update metadata
-      chrome.storage.local.set({ "saveTabs-lastSave": time.today() });
+      chrome.storage.local.set({ "saveTabs-lastSave": time.nowISO() });
     });
 
   // chrome.storage.local.set({ "saveTabs-nextIndex": 10 });
@@ -64,7 +69,7 @@ export const saveTabsDownload = () =>
   getAllTabs().then((res) => {
     downloadText(
       `tabsExport_${new Date().getTime()}.json`,
-      JSON.stringify({ date: time.now(), ...res }, null, 4),
+      JSON.stringify({ date: time.nowISO(), ...res }, null, 4),
       "application/json"
     );
   });

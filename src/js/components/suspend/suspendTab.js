@@ -23,7 +23,7 @@ export default function suspendTab(tab) {
       url: tab.url,
       favicon: tab.favIconUrl,
       title: tab.title,
-      time: time.now(),
+      time: time.nowISO(),
     });
     chrome.tabs.update(tab.id, { url: `${suspend_url}?${query}` });
   }

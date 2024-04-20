@@ -1,3 +1,5 @@
+import { formatTime } from "./components/time.js";
+
 const urlParams = new URLSearchParams(window.location.search);
 
 // Reload on space bar
@@ -6,17 +8,6 @@ document.addEventListener("keydown", (event) => {
     window.location.href = urlParams.get("url");
   }
 })
-
-// https://devhints.io/wip/intl-datetime
-const formatTime = (datetime) => new Intl.DateTimeFormat('en-AU', {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-  second: 'numeric',
-  timeZone: 'Australia/Sydney'
-}).format(datetime)
 
 const timeElement = document.getElementById("suspended-time");
 const time = Date.parse(urlParams.get("time"));
