@@ -7,10 +7,21 @@ document.addEventListener("keydown", (event) => {
   }
 })
 
+// https://devhints.io/wip/intl-datetime
+const formatTime = (datetime) => new Intl.DateTimeFormat('en-AU', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
+  timeZone: 'Australia/Sydney'
+}).format(datetime)
+
 const timeElement = document.getElementById("suspended-time");
-const time = moment(urlParams.get("time"));
+const time = Date.parse(urlParams.get("time"));
 timeElement.appendChild(
-  document.createTextNode(time.format("Do MMMM YYYY, h:mm:ss a"))
+  document.createTextNode(formatTime(time))
 );
 
 const iconElement = document.getElementById("icon");
