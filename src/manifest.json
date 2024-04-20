@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "TabSuspender",
+  "name": "TabUtility",
   "description": "Only what I need in a browser tab suspender.",
   "version": "0.2",
   "author": "dustbringer",
@@ -15,7 +15,7 @@
       "32": "img/icon32.png",
       "192": "img/icon192.png"
     },
-    "default_title": "Popup",
+    "default_title": "TabUtility",
     "default_popup": "popup.html"
   },
   "permissions": ["tabs", "tabGroups", "storage", "contextMenus", "activeTab"],

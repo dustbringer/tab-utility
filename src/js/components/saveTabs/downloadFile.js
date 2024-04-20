@@ -13,6 +13,3 @@ export function downloadText(fileName, text, type = "") {
   link.click();
   document.body.removeChild(link);
 }
-
-
-      // downloadText("myFile.json", JSON.stringify({ tabs, groups }));

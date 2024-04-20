@@ -1,6 +1,6 @@
 import * as time from "../time.js";
 
-export const getAllTabs = Promise.all([
+export const getAllTabs = () => Promise.all([
   chrome.tabs.query({}).then((res) =>
     res.map(({ groupId, pinned, title, url, windowId }) => ({
       groupId,
@@ -18,7 +18,7 @@ export const getAllTabs = Promise.all([
       windowId,
     }))
   ),
-]);
+]).then(([tabs, groups]) => ({ tabs: tabs, groups: groups }));
 
 export const MAXINDEX = 100;
 
@@ -35,9 +35,9 @@ export const saveTabs = () => {
     })
     .then((nextIndex) => {
       // Save tabs to index
-      getAllTabs.then(([tabs, groups]) => {
-        console.log(tabs, groups);
-        const tabData = JSON.stringify({ time: time.now(), tabs, groups });
+      getAllTabs().then((res) => {
+        console.log(res);
+        const tabData = JSON.stringify({ time: time.now(), ...res });
         chrome.storage.local
           .set({ [`saveTabs-index-${nextIndex}`]: tabData })
           .then(() => {

@@ -9,10 +9,15 @@ export const generateQuery = (options) =>
     )
     .join("&");
 export default function suspendTab(tab) {
-  if (!tab.url || tab.url.startsWith("chrome://")) {
-    console.log("Cannot suspend! Tab is not a website or file");
-  } else if (tab.url.startsWith(suspend_url)) {
+  console.log(tab.url);
+  if (tab.url && tab.url.startsWith(suspend_url)) {
     console.log("Cannot suspend! Tab already suspended");
+  } else if (
+    !tab.url ||
+    tab.url.startsWith("chrome://") ||
+    tab.url.startsWith("chrome-extension://")
+  ) {
+    console.log("Cannot suspend! Tab is not a website or file");
   } else {
     const query = generateQuery({
       url: tab.url,
