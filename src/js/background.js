@@ -1,17 +1,17 @@
 // import information https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/basics
 import suspendTab from "./components/suspend/suspendTab.js";
-import { saveTabsBrowser } from "./components/saveTabs/saveTabs.js";
+import { saveTabsBrowser, getLastSave } from "./components/saveTabs/saveTabs.js";
 import * as time from "./components/time.js";
 
 /************************* Listeners *************************/
 // Startup
 chrome.runtime.onStartup.addListener(() => {
-  chrome.storage.local.get("saveTabs-lastSave").then((res) => {
-    const lastSave = time.toDay(new Date(Date.parse(res["saveTabs-lastSave"])));
+  getLastSave().then((res) => {
+    const lastSave = time.toDay(new Date(Date.parse(res)));
     console.log(
-      `Tabs: Day of Last save = ${time.formatDate(
-        lastSave
-      )}, Now = ${time.formatTime(time.now())}, Difference = ${time.diffDays(
+      `Tabs: Day of Last save = ${
+        res !== undefined ? time.formatDate(lastSave) : "None"
+      }, Now = ${time.formatTime(time.now())}, Difference = ${time.diffDays(
         lastSave,
         time.now()
       )}`

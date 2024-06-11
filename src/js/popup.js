@@ -28,7 +28,8 @@ saveToBrowserButtonElement.addEventListener("click", () => {
 
 const lastSavedSpanElement = document.getElementById("last-saved");
 getLastSave().then((res) => {
-  lastSavedSpanElement.appendChild(document.createTextNode(formatTime(new Date(Date.parse(res)))));
+  const text = res !== undefined ? formatTime(new Date(Date.parse(res))) : "None"
+  lastSavedSpanElement.appendChild(document.createTextNode(text));
 });
 
 // Save tab info to file
