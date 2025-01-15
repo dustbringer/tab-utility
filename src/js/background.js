@@ -1,7 +1,17 @@
 // import information https://developer.chrome.com/docs/extensions/develop/concepts/service-workers/basics
 import suspendTab from "./components/suspend/suspendTab.js";
-import { saveTabsBrowser, getLastSave } from "./components/saveTabs/saveTabs.js";
+import {
+  saveTabsBrowser,
+  getLastSave,
+} from "./components/saveTabs/saveTabs.js";
 import * as time from "./components/time.js";
+
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab;
+}
 
 /************************* Listeners *************************/
 // Startup
@@ -20,6 +30,13 @@ chrome.runtime.onStartup.addListener(() => {
       saveTabsBrowser(); // Save if it has been almost a day
     }
   });
+});
+
+// Keyboard shortcuts
+chrome.commands.onCommand.addListener((command) => {
+  if (command === "suspend-tab") {
+    getCurrentTab().then((tab) => suspendTab(tab));
+  }
 });
 
 /*

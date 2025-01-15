@@ -69,7 +69,7 @@ export const saveTabsDownload = () =>
   getAllTabs().then((res) => {
     downloadText(
       `tabsExport_${new Date().getTime()}.json`,
-      JSON.stringify({ date: time.nowISO(), ...res }, null, 4),
+      JSON.stringify({ time: time.nowISO(), ...res }, null, 4),
       "application/json"
     );
   });
