@@ -1,7 +1,12 @@
 {
   "addons": {
     "tab-utility@dustbringer": {
-      "updates": []
+      "updates": [
+        {
+          "version": "0.2",
+          "update_link": "https://github.com/dustbringer/tab-utility/releases/download/firefox/3c52bc29873e43e595ed-0.2.xpi"
+        }
+      ]
     }
   }
 }
