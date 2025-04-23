@@ -1,28 +1,32 @@
 import * as time from "../time.js";
 import { downloadText } from "./downloadFile.js";
 
+// export const getAllTabs = () =>
+//   Promise.all([
+//     chrome.tabs.query({}).then((res) =>
+//       res.map(({ groupId, pinned, title, url, windowId }) => ({
+//         groupId,
+//         pinned,
+//         title,
+//         url,
+//         windowId,
+//       }))
+//     ),
+//     chrome.tabGroups.query({}).then((res) =>
+//       res.map(({ color, title, id, windowId }) => ({
+//         color,
+//         title,
+//         groupId: id,
+//         windowId,
+//       }))
+//     ),
+//   ]).then(([tabs, groups]) => ({ tabs: tabs, groups: groups }));
+
 export const getAllTabs = () =>
-  Promise.all([
-    chrome.tabs.query({}).then((res) =>
-      res
-      // res.map(({ groupId, pinned, title, url, windowId }) => ({
-      //   groupId,
-      //   pinned,
-      //   title,
-      //   url,
-      //   windowId,
-      // }))
-    ),
-    chrome.tabGroups.query({}).then((res) =>
-      res
-      // res.map(({ color, title, id, windowId }) => ({
-      //   color,
-      //   title,
-      //   groupId: id,
-      //   windowId,
-      // }))
-    ),
-  ]).then(([tabs, groups]) => ({ tabs: tabs, groups: groups }));
+  Promise.all([chrome.tabs.query({}).then((res) => res)]).then(([tabs]) => ({
+    tabs: tabs,
+    groups: [],
+  }));
 
 export const getLastSave = () =>
   chrome.storage.local

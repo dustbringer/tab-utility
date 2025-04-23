@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "TabUtility",
+  "description": "Only what I need in a browser tab suspender.",
+  "version": "0.2",
+  "author": "dustbringer",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "192": "img/icon192.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png",
+      "192": "img/icon192.png"
+    },
+    "default_title": "TabUtility",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["tabs", "tabGroups", "storage", "contextMenus", "activeTab"],
+  "host_permissions": ["*://*/*"],
+  "background": {
+    "service_worker": "js/background.js",
+    "scripts": ["js/background.js"],
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "file://*/*"],
+      "js": ["js/contentScript.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["suspended.html"],
+      "matches": []
+    }
+  ],
+  "commands": {
+    "suspend-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+S"
+      },
+      "description": "Suspend current tab"
+    }
+  }
+}
