@@ -45,5 +45,11 @@
       },
       "description": "Suspend current tab"
     }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tab-utility@dustbringer",
+      "update_url": "https://raw.githubusercontent.com/dustbringer/tab-utility/refs/heads/main/src-firefox/update.json"
+    }
   }
 }
