@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "TabUtility",
   "description": "Only what I need in a browser tab suspender.",
-  "version": "0.2",
+  "version": "0.3",
   "author": "dustbringer",
   "icons": {
     "16": "img/icon16.png",
