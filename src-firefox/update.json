@@ -9,6 +9,10 @@
         {
           "version": "0.3",
           "update_link": "https://github.com/dustbringer/tab-utility/releases/download/firefox-v0.3/3c52bc29873e43e595ed-0.3.xpi"
+        },
+        {
+          "version": "0.3.1",
+          "update_link": "https://github.com/dustbringer/tab-utility/releases/download/firefox-v0.3.1/3c52bc29873e43e595ed-0.3.1.xpi"
         }
       ]
     }
